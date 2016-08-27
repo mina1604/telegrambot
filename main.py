@@ -8,9 +8,14 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 logger = logging.getLogger(__name__)
 
+location_command = "/give_me_book_locations - will send you locations where you can go hunt books\n"
+facebook_command = "/facebook - our facebook group\n"
+intro_command = "/introduction - will give you the game rules\n"
+about_command = "/about - who we are and why we're doing this\n"
+clue_command = "/give_me_a_clue - will give you a clue about a location\n"
+help_command = "/help - see all commands\n"
 
 # Methods handling commands
-
 def start(bot, update):
     bot.sendMessage(chat_id=update.message.chat_id,
                     text="I'm a bot, please talk to me!")
@@ -20,7 +25,8 @@ def hello(bot, update):
                     text='Hello {}'.format(update.message.from_user.first_name))
 
 def help(bot, update):
-    bot.sendMessage(update.message.chat_id, text='Help!')
+    bot.sendMessage(update.message.chat_id, text=intro_command + location_command + clue_command + facebook_command + about_command + help_command)
+
 
 def echo(bot, update):
     bot.sendMessage(chat_id=update.message.chat_id, text=update.message.text)
