@@ -8,7 +8,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 logger = logging.getLogger(__name__)
 
-location_command = "/give_me_book_locations - will send you locations where you can go hunt books\n"
+location_command = "/give_me_location - will send you locations where you can go hunt books\n"
 facebook_command = "/facebook - our facebook group\n"
 intro_command = "/introduction - will give you the game rules\n"
 about_command = "/about - who we are and why we're doing this\n"
@@ -20,6 +20,23 @@ def start(bot, update):
     bot.sendMessage(chat_id=update.message.chat_id,
                     text="I'm a bot, please talk to me!")
 
+def introduction(bot, update):
+    bot.sendMessage(chat_id=update.message.chat_id,
+                    text="Introducing stuff")
+
+def facebook(bot, update):
+    bot.sendMessage(chat_id=update.message.chat_id,
+                    text="[Facebook Group](https://www.facebook.com/groups/166099133797870/)")
+def location(bot, update):
+    print "in location"
+    bot.sendPhoto(chat_id=update.message.chat_id,
+                  photo="http://www.landtmann.at/fileadmin/user_upload/landtmann/bildergalerie/landtmann-05.jpg")
+def clue(bot, update):
+    bot.sendMessage(chat_id=update.message.chat_id,
+                    text="It is at one of 9 sisters where coffee is not the way to go!")
+def about(bot, update):
+    bot.sendMessage(chat_id=update.message.chat_id,
+                    text="something about us")
 def hello(bot, update):
     bot.sendMessage(chat_id=update.message.chat_id,
                     text='Hello {}'.format(update.message.from_user.first_name))
@@ -49,6 +66,11 @@ dispatcher = updater.dispatcher
 # Register the methods handling commands
 dispatcher.add_handler(CommandHandler('start', start))
 dispatcher.add_handler(CommandHandler('hello', hello))
+dispatcher.add_handler(CommandHandler('introduction', introduction))
+dispatcher.add_handler(CommandHandler('facebook', facebook))
+dispatcher.add_handler(CommandHandler('give_me_location', location))
+dispatcher.add_handler(CommandHandler('give_me_a_clue', clue))
+dispatcher.add_handler(CommandHandler('about', about))
 dispatcher.add_handler(CommandHandler('help', help))
 dispatcher.add_handler(echo_handler)
 dispatcher.add_handler(caps_handler)
